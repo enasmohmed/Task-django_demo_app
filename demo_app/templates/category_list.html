@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+{% block title %}Category List {% endblock %}
+{% block content %}
+    <div class="">
+        <div class="page-title">
+              <div class="title_left" style="margin-top: 6% !important;">
+                <h3>Category List</h3>
+              </div>
+
+              <div class="title_right">
+                    <div class="col-md-5 col-sm-5   form-group pull-right top_search">
+                          <form method='GET' action="">
+                          <div class="input-group">
+                                <input type="text" name="search_text" class="form-control" placeholder="Search for..." value='{{ request.GET.search_text }}'>
+                                <span class="input-group-btn">
+                                  <button class="btn btn-default" type="submit">Go!</button>
+                                </span>
+                          </div>
+                           </form>
+                    </div>
+              </div>
+        </div>
+
+        <div class="clearfix"></div>
+        <div class="row" style="display: block;">
+            <div class="col-md-12 col-sm-12  ">
+                <div class="x_panel">
+                      {% if category_data %}
+                      <a href="{% url 'demo_app:add_category' %}" class="btn btn-secondary pull-right">Add Category</a>
+                      <div class="x_content">
+                            <div class="table-responsive">
+                                <table class="table table-striped jambo_table bulk_action">
+                                    <thead>
+                                        <tr class="headings">
+                                            <th class="column-title">&nbsp; </th>
+                                            <th class="column-title">Name </th>
+                                            <th class="column-title no-link last"><span class="nobr">Action</span></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for obj in category_data %}
+                                            <tr {% if forloop.counter|divisibleby:2 %} class="even pointer" {% else %} class="odd pointer" {% endif %}>
+                                              <th scope="row">{{forloop.counter}}</th>
+                                              <td>{{ obj.category_name }}</td>
+                                              <td class=" last">
+                                                  <a href="">Edit</a> |
+                                                  <a href="">Delete</a>
+                                              </td>
+                                            </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                            {% if is_paginated %}
+                                <nav aria-label="Page navigation example">
+                                    <ul class="pagination">
+                                        {% if page_obj.has_previous %}
+                                            <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">Previous</a></li>
+                                        {% else %}
+                                            <li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
+                                        {% endif %}
+                                        {% for i in paginator.page_range %}
+                                            {% if page_obj.number == i %}
+                                                <li class="page-item active"><a class="page-link" href="#">{{ i }}</a></li>
+                                            {% else %}
+                                                <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+                                            {% endif %}
+                                        {% endfor %}
+                                        {% if page_obj.has_next %}
+                                            <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a></li>
+                                        {% else %}
+                                            <li class="page-item disabled"><a class="page-link" href="#">Next</a></li>
+                                        {% endif %}
+                                    </ul>
+                                </nav>
+                            {% endif %}
+                      </div>
+                      {% else %}
+                          <div class="text-center">
+                              <a href="" class="btn btn-lg btn-secondary">Add Category</a>
+                          </div>
+                      {% endif %}
+                </div>
+              </div>
+        </div>
+    </div>
+{% endblock %}

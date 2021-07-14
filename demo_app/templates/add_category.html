@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% block title %} Add Category {% endblock %}
+{% block content %}
+<div class="container">
+    <div class="row">
+         <div class="page-title">
+              <div class="title_left" style="margin-top: 6% !important;">
+                <h3>Add Category</h3>
+              </div>
+         </div>
+
+        <div class="section" style="margin-top: 7% !important;">
+              <div class="row">
+            <div class="col-md-6 mx-auto mt-5 mb-5">
+                <form action="{% url 'set_language' %}" method="post">{% csrf_token %}
+                    <input name="next" type="hidden" value="{{ redirect_to }}" />
+                        <select name="language">
+                            {% get_current_language as LANGUAGE_CODE %}
+                            <option value='ar' {% if 'ar' == LANGUAGE_CODE %} selected{% endif %}> Arabic</option>
+                            <option value='en' {% if 'en' == LANGUAGE_CODE %} selected{% endif %}> English</option>
+                        </select>
+                    <input type="submit" value="Go" />
+                </form>
+                <form action="" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ form }}
+                    <button type="submit" class="btn btn-primary">Add Category</button>
+                </form>
+            </div>
+        </div>
+
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

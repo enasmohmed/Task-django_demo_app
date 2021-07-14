@@ -1,0 +1,17 @@
+<div id="messages">
+	{% if messages %}
+	{% for message in messages %}
+	<div class="alert alert-{{ message.tags }}">
+		<a class="close" data-dismiss="alert" href="#">&times;</a>
+		<div class="alertinner">
+			{# Allow HTML to be embedded in messages #}
+			{% if 'safe' in message.tags %}
+			{{ message|safe }}
+			{% else %}
+			{{ message }}
+			{% endif %}
+		</div>
+	</div>
+	{% endfor %}
+	{% endif %}
+</div>

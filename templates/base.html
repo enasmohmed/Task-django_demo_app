@@ -1,0 +1,66 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>{% block title %}{% endblock %}</title>
+        <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/font-awesome.css' %}" />
+        <style>
+            /* Sticky footer styles
+            -------------------------------------------------- */
+            html {
+              position: relative;
+              min-height: 100%;
+            }
+            body {
+              /* Margin bottom by footer height */
+              margin-bottom: 60px;
+            }
+            .footer {
+              position: fixed;
+              bottom: 0;
+              width: 100%;
+              /* Set the fixed height of the footer here */
+              height: 60px;
+              line-height: 60px; /* Vertically center the text there */
+              background-color: #f5f5f5;
+            }
+
+
+            /* Custom page CSS
+            -------------------------------------------------- */
+            /* Not required for template or sticky footer method. */
+
+            body > .container {
+              padding: 60px 15px 0;
+            }
+
+            .footer > .container {
+              padding-right: 15px;
+              padding-left: 15px;
+            }
+
+        </style>
+        {%block style %} {% endblock %}
+    </head>
+    <body id="bg">
+        {% include 'header.html' %}
+        <div class="container-fluid">
+        {% block content %}
+
+	    {% endblock content %}
+        </div>
+        {% include 'footer.html' %}
+    </body>
+    <script type="text/javascript" src="{% static 'js/jquery-3.5.1.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
+<!--    <script type="text/javascript">-->
+<!--$(function(){-->
+<!--$('input[type=email]').style('text-transform', 'lowercase');-->
+<!--})-->
+<!--</script>-->
+    {% block js %} {% endblock %}
+</html>
